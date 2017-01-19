@@ -39,11 +39,12 @@
 
 (define-values (page-dispatch url)
   (dispatch-rules
-   [("restart-servlet") (λ _ (thread (lambda() (sleep 1)
+   [("restart-servlet") #:method "post"
+                        (λ _ (thread (lambda() (sleep 1)
                                        (exit-global 0)))
                           (response/full 200 #"Okay" (current-seconds)
                                          TEXT/HTML-MIME-TYPE
-                                         '()))]
+                                         '() '()))]
    [("en") (description "en")]
    [("zht") (description "zht")]
    [("zhs") (description "zhs")]
