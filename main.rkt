@@ -25,6 +25,8 @@
                        (make-header #"Vary" #"Accept-Language"))
                  '()))
 
+(define exit-global (exit-handler))
+
 (define (description lang)
   (define is-mirror? #f)
   (lambda _
@@ -38,7 +40,7 @@
 
 (define-values (page-dispatch url)
   (dispatch-rules
-   [("restart-servlet") (exit 0)]
+   [("restart-servlet") (λ _ (let r () (exit-global 0) (r)))]
    [("en") (description "en")]
    [("zht") (description "zht")]
    [("zhs") (description "zhs")]
