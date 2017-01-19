@@ -38,6 +38,7 @@
 
 (define-values (page-dispatch url)
   (dispatch-rules
+   [("restart-servlet") (exit 0)]
    [("en") (description "en")]
    [("zht") (description "zht")]
    [("zhs") (description "zhs")]
