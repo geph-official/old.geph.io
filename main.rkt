@@ -21,7 +21,6 @@
                                       ["zh-CN" #"/zhs"]
                                       [(regexp #rx"^zh") #"/zht"]
                                       [_ #"/en"]))
-                       (make-header #"Cache-Control" #"no-cache")
                        (make-header #"Vary" #"Accept-Language"))
                  '()))
 
