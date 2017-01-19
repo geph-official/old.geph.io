@@ -1,0 +1,137 @@
+@(local-require web-server/templates)
+@(local-require "static-link.rkt")
+@(define lcode
+    (match lang
+        ["en" "en"]
+        ["zht" "zh-TW"]
+        ["zhs" "zh-CN"]))
+@(define title
+    (match lang
+        ["en" "Geph"]
+        ["zht" "迷霧通"]
+        ["zhs" "迷雾通"]))
+<!DOCTYPE html>
+<html lang="@|lcode|">
+@(include-template "frag-shared-head.html")
+<body>
+    <div id="top-bar">
+        @unless[is-mirror?]{@list{<img src="logo-@|lang|.png" alt="Geph" id="logo">}}
+        @when[is-mirror?]{@list{<img src='@(static-link "logo-zhs-mirror.png" is-mirror?)'
+            alt="Geph" id="logo">}}
+        <div class="text-xs-right text-white">
+            <select class="form-control" id="langselect">
+                <option value="//geph.io/en" @when[(equal? lang "en")]{selected}>English</option>
+                <option value="//geph.io/zhs" @when[(equal? lang "zhs")]{selected}>简体中文</option>
+                <option value="https://s3-ap-northeast-2.amazonaws.com/geph-mirror/ZHS-STATIC.html" @when[is-mirror?]{selected}>
+                    简体中文（镜像）</option>
+                <option value="//geph.io/zht" @when[(equal? lang "zht")]{selected}>正體中文</option>
+            </select>
+        </div>
+    </div>
+    <div id="top-bar-pad"></div>
+    <div id="big-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    @(include-template "frag-jumbotron.html")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @when[is-mirror?]{@list{
+            <div class="row">
+                <div class="col col-1"></div>
+                <div class="col col-10 alert alert-info alert-dismissable fade show">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading"><b>提示</b></h4>
+                    <p>本页面是为了方便<b>中国大陆</b>用户而设立的官方<b>「免翻墙」备用镜像</b>。我们使用了规避网络封锁的技术，所以即使网址被发现也极难封锁。请尽情分享链接！</p>
+
+                    <p><b>如果您并不在中国大陆</b>，或已有翻墙软件，<b>请直接使用<a href="https://geph.io/zhs">官方网站</a></b>，避免对服务器造成不必要的负担。</p>
+
+                    <p>谢谢合作！</p>
+                </div>
+                <div class="col col-1"></div>
+            </div>
+        }}
+
+        @(include-template "frag-getting-started.html")
+
+        @(include-template "frag-secure-and-reliable.html")
+
+        @(include-template "frag-fast-and-easy.html")
+
+        <div class="row">
+            <div class="col-xs-12">
+                <footer>
+                    <hr>
+                    <p>
+                        <small>
+                            Maintained by the Geph development team.<br>
+                            Code licensed under Apache and GPLv3, website under
+                            <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC-BY-NC-ND 4.0</a>
+                        </small>
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS below this line -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            // fix the annoying sticky buttons
+            $('.btn').mouseup(function() { this.blur() })
+
+            // language selector
+            $("#langselect").change(function() {
+                location.href = (this.options[this.selectedIndex].value)
+            })
+        })
+    </script>
+
+    <!-- Remove wechat from the premises! -->
+    <!-- From github.com/kujian/weixinTip -->
+    <script type="text/javascript">
+		function is_weixin() {
+		    var ua = navigator.userAgent.toLowerCase();
+		    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+		var isWeixin = is_weixin();
+		var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+        @(define xxx (static-link "live_weixin.png" is-mirror?))
+		var weixinTip = '<div id="weixinTip"><div id="weixinInner"></div></div>';
+
+		if(isWeixin){
+			$("body").append(weixinTip);
+		}
+		$("#weixinTip").css({
+			"position":"fixed",
+			"left":"0",
+			"top":"0",
+			"height":winHeight,
+			"width":"100%",
+			"z-index":"1000",
+			"background-color":"rgba(0,0,0,0.8)",
+			"filter":"alpha(opacity=80)",
+		});
+		$("#weixinInner").css({
+            "background-size":"contain",
+            "background-repeat":"no-repeat",
+            "background-image":"url('@|xxx|')",
+            "width":"100%",
+            "height":"100%",
+            "z-index":"10000",
+		});
+	</script>
+</body>
+</html>

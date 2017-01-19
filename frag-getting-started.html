@@ -1,0 +1,113 @@
+@(define issue-tracker-url "https://github.com/bunsim/geph/issues")
+@(define desktop-version "D001")
+@(define android-version "A001")
+@(local-require "static-link.rkt")
+
+<div class="row">
+    <div class="col col-12">
+        <h2><img src='@(static-link "icons/mi_file_download.svg" is-mirror?)' class="hdr-icon">
+            @when[(equal? lang "en")]{
+                @list{Getting started}
+            }
+            @when[(equal? lang "zht")]{
+                @list{開始使用}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{开始使用}
+            }
+        </h2>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12 col-sm-6">
+        <h4 id="dl-links">
+            @when[(equal? lang "en")]{
+                Download links
+            }
+            @when[(equal? lang "zht")]{
+                下載連接
+            }
+            @when[(equal? lang "zhs")]{
+                下载链接
+            }</h4>
+        <div class="container-fluid no-margin">
+            <div class="row">
+                @when[(equal? lang "en")]{
+                    @list{
+                        <div class="col col-6"><h6><b>Desktop (version @|desktop-version|)</b></h6></div>
+                        <div class="col col-6"><h6><b>Android (version @|android-version|)</b></h6></div>
+                    }
+                }
+                @when[(equal? lang "zht")]{
+                    @list{
+                        <div class="col col-6"><h6><b>桌面（版本 @|desktop-version|）</b></h6></div>
+                        <div class="col col-6"><h6><b>Android（版本 @|android-version|）</b></h6></div>
+                    }
+                }
+                @when[(equal? lang "zhs")]{
+                    @list{
+                        <div class="col col-6"><h6><b>桌面（版本 @|desktop-version|）</b></h6></div>
+                        <div class="col col-6"><h6><b>Android（版本 @|android-version|）</b></h6></div>
+                    }
+                }
+            </div>
+            <div class="row">
+                <div class="col col-6">
+                    <ul class="unstyled-list">
+                        <li>Windows: <a href="https://dl.geph.io/desktop-builds/geph-windows-@|desktop-version|-setup.exe">32/64-bit</a></li>
+                        <li>Linux: <a href="https://dl.geph.io/desktop-builds/geph-linux32-@|desktop-version|.tar.bz2">32-bit</a> <a href="https://dl.geph.io/desktop-builds/geph-linux64-@|desktop-version|.tar.bz2">64-bit</a></li>
+                        <li>macOS: <a href="https://dl.geph.io/desktop-builds/geph-macos-@|desktop-version|.tar.bz2">64-bit</a></li>
+                    </ul>
+                </div>
+                <div class="col col-6">
+                    <ul class="unstyled-list">
+                        <li>Android 5.0+: <a href="https://dl.geph.io/android-builds/geph-android-@|android-version|.apk" target="_blank">APK</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-12">
+                    @when[(equal? lang "en")]{
+                        @list{
+                            <b>Note:</b> Geph is currently highly experimental alpha software. Features may come and go without warning, and there might be severe bugs. <i>The Android version is not yet feature-complete</i>. Please report any problems you find to the <a href="@|issue-tracker-url|">issue tracker</a> on GitHub!<a>
+                        }
+                    }
+                    @when[(equal? lang "zht")]{
+                        @list{
+                            <b>注意！</b> 迷霧通目前是實驗性的測試版軟件。功能有可能隨時發生變化，也有可能有各式各樣嚴重的程式錯誤。<u>特別是Android版本，語言只有英文，且不一定穩定</u>。如果發現任何問題，請到<a href="@|issue-tracker-url|">GitHub</a>報告，幫助我們解決。
+                        }
+                    }
+                    @when[(equal? lang "zhs")]{
+                        @list{
+                            <b>注意！ </b> 迷雾通目前是实验性的测试版软件。功能有可能随时发生变化，也有可能有各式各样严重的程序错误。<u>特别是Android版本，语言只有英文，且不一定稳定</u>。如果发现任何问题，请到<a href="@|issue-tracker-url|">GitHub</a>报告，帮助我们解决。
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-12 col-sm-6">
+        @when[(equal? lang "en")]{
+            @list{
+                <h4>Development</h4>
+                <p>Geph is open-source software, with most of the key components licensed under the permissive Apache license. We believe that truly secure and trustworthy software should be open-source, with no hidden surprises and involving contributors from around the world.</p>
+                <p> Anybody interested in helping us defeat Internet censorship is welcome to <a href="https://github.com/bunsim/geph/">contribute on GitHub</a>!</p>
+            }
+        }
+        @when[(equal? lang "zht")]{
+            @list{
+                <h4>開發</h4>
+                <p>迷霧通是開源軟件，絕大部分關鍵部件使用開放的Apache協議。我們認爲真正安全可靠的軟件需要大家的參與，且不能有任何隱藏的秘密。</p>
+                <p>任何希望幫助我們突破互聯網封鎖的人，都可以<a href="https://github.com/bunsim/geph/">在GitHub上參與開發</a>！</p>
+            }
+        }
+        @when[(equal? lang "zhs")]{
+            @list{
+                <h4>开发</h4>
+                <p>迷雾通是开源软件，绝大部分关键部件使用开放的Apache协议。我们认为真正安全可靠的软件需要大家的参与，且不能有任何隐藏的秘密。 </p>
+                <p>任何希望帮助我们突破互联网封锁的人，都可以<a href="https://github.com/bunsim/geph/">在GitHub上参与开发</a>！ </p>
+            }
+        }
+    </div>
+</div>

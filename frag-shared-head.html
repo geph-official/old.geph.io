@@ -1,0 +1,59 @@
+@(local-require "static-link.rkt")
+<head>
+    <meta charset="utf-8">
+    <title>@|title|</title>
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href='@(static-link "custom.css" is-mirror?)'>
+    @unless[is-mirror?]{
+        @list{<link rel="shortcut icon" href='@(static-link "favicon-logo.ico" is-mirror?)'>}}
+    <link rel="alternate" hreflang="en" href="https://geph.io/en">
+    <link rel="alternate" hreflang="zh-TW" href="https://geph.io/zht">
+    <link rel="alternate" hreflang="zh-CN" href="https://geph.io/zhs">
+    <link rel="alternate" hreflang="zh" href="https://geph.io/zht">
+    @when[(equal? lang "zhs")]{
+        @list{
+            <style>
+                /* Prevent using simsun, the worst font ever, on windows */
+                body {
+                    font-family: Arial, "Liberation Sans", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif !important;
+                }
+            </style>
+        }
+    }
+    @when[(equal? lang "zht")]{
+        @list{
+            <style>
+                /* Prevent using simsun, the worst font ever, on windows */
+                body {
+                    font-family: Arial, "Liberation Sans", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif !important;
+                }
+            </style>
+        }
+    }
+
+    <style>
+        #big-header {
+            background-image: url('@(static-link "bridge.jpg" is-mirror?)');
+        }
+    </style>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      // tracker methods like "setCustomDimension" should be called before "trackPageView"
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//geph.io/piwik/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Piwik Code -->
+</head>

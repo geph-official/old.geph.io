@@ -1,0 +1,102 @@
+body {
+    background-color: #ffffff;
+    font-family: Arial, "Liberation Sans", sans-serif;
+}
+
+#top-bar {
+    height: 48px;
+    line-height: 48px;
+    background-color: #0d0015;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+
+#top-bar-pad {
+    height: 48px;
+}
+
+@media (min-width: 768px) {
+    #top-bar {
+        height: 56px;
+        line-height: 56px;
+    }
+    #top-bar-pad {
+        height: 56px;
+    }
+}
+
+#big-header {
+    background-size: cover;
+    margin-bottom: 40px;
+}
+
+#logo {
+    height: 100%;
+    margin-left: 20px;
+    float: left;
+}
+
+#langselect {
+    width: 130px;
+    height: 40px;
+    margin-top: 4px;
+    margin-right: 20px;
+    font-size: 70%;
+    display: inline-block;
+
+    background-color: #555555 !important;
+    color: #CCCCCC !important;
+    float: right;
+}
+
+@media (min-width: 768px) {
+    #langselect {
+        margin-top: 8px;
+        width: 150px;
+        font-size: 90%;
+    }
+}
+
+#main-jumbo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#main-jumbo > .lead, h1 {
+    font-weight: normal !important;
+}
+
+#main-jumbo > h1 {
+    font-size: calc(42px + 1.8vw) !important;
+}
+
+#main-jumbo > .lead {
+    font-size: calc(16px + 0.4vw) !important;
+}
+
+.hdr-icon {
+    height: 1em;
+    margin-top: -4px;
+    margin-right: 10px;
+}
+
+.unstyled-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.section-hdr {
+    margin-top: 20px;
+}
+
+h4 {
+    margin-bottom: 14px;
+}
