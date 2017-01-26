@@ -47,11 +47,25 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="alert-heading"><b>提示</b></h4>
-                    <p>本页面是为了方便<b>中国大陆</b>用户而设立的官方<b>「免翻墙」备用镜像</b>。我们使用了规避网络封锁的技术，所以即使网址被发现也极难封锁。请尽情分享链接！</p>
+                    <p>本页面（便捷链接<a href="https://waa.ai/miwutong">https://waa.ai/miwutong</a>）是为了方便<b>中国大陆</b>用户而设立的官方<b>「免翻墙」备用镜像</b>。我们使用了规避网络封锁的技术，所以即使网址被发现也极难封锁。</p>
 
                     <p><b>如果您并不在中国大陆</b>，或已有翻墙软件，<b>请直接使用<a href="https://geph.io/zhs">官方网站</a></b>，避免对服务器造成不必要的负担。</p>
 
                     <p>谢谢合作！</p>
+                </div>
+                <div class="col col-1"></div>
+            </div>
+        }}
+
+        @when[(and (not is-mirror?) (equal? "zhs" lang))]{@list{
+            <div class="row">
+                <div class="col col-1"></div>
+                <div class="col col-10 alert alert-info alert-dismissable fade show">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading"><b>提示</b></h4>
+                    <p>官网有可能被屏蔽，向<b>中国大陆</b>朋友分享迷雾通时，建议使用<b>官方免翻墙镜像</b>：<a href="https://waa.ai/miwutong">https://waa.ai/miwutong</a></p>
                 </div>
                 <div class="col col-1"></div>
             </div>
@@ -66,12 +80,12 @@
         @(include-template "frag-faq.html")
 
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col col-12">
+                <hr>
                 <footer>
-                    <hr>
                     <p>
-                        <small>
-                            Maintained by the Geph development team.<br>
+                        <small class="text-muted">
+                            © 2017- RENSA Labs<br>
                             Code licensed under Apache and GPLv3, website under
                             <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC-BY-NC-ND 4.0</a>
                         </small>

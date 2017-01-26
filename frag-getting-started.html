@@ -1,6 +1,6 @@
-@(define issue-tracker-url "https://github.com/bunsim/geph/issues")
-@(define desktop-version "D001")
-@(define android-version "A001")
+@(define issue-tracker-url "https://github.com/rensa-labs/geph/issues")
+@(define desktop-version "D002")
+@(define android-version "A002")
 @(local-require "static-link.rkt")
 
 <div class="row">
@@ -56,8 +56,8 @@
                 <div class="col col-6">
                     <ul class="unstyled-list">
                         <li>Windows: <a href="https://dl.geph.io/desktop-builds/geph-windows-@|desktop-version|-setup.exe">32/64-bit</a></li>
-                        <li>Linux: <a href="https://dl.geph.io/desktop-builds/geph-linux32-@|desktop-version|.tar.bz2">32-bit</a> <a href="https://dl.geph.io/desktop-builds/geph-linux64-@|desktop-version|.tar.bz2">64-bit</a></li>
-                        <li>macOS: <a href="https://dl.geph.io/desktop-builds/geph-macos-@|desktop-version|.tar.bz2">64-bit</a></li>
+                        <li>Linux (AppImage): <a href="https://dl.geph.io/desktop-builds/geph-linux32-@|desktop-version|.AppImage">32-bit</a> <a href="https://dl.geph.io/desktop-builds/geph-linux64-@|desktop-version|.AppImage">64-bit</a></li>
+                        <li>macOS (dmg): <a href="https://dl.geph.io/desktop-builds/geph-macos-@|desktop-version|.dmg">64-bit</a></li>
                     </ul>
                 </div>
                 <div class="col col-6">
@@ -70,17 +70,17 @@
                 <div class="col col-12">
                     @when[(equal? lang "en")]{
                         @list{
-                            <b>Note:</b> Geph is currently highly experimental alpha software. Features may come and go without warning, and there might be severe bugs. <i>The Android version is not yet feature-complete</i>. Please report any problems you find to the <a href="@|issue-tracker-url|">issue tracker</a> on GitHub!<a>
+                            <b>Note:</b> Geph is currently highly experimental alpha software. Features may come and go without warning, and there might be severe bugs. Please report any problems you find to the <a href="@|issue-tracker-url|">issue tracker</a> on GitHub!<a>
                         }
                     }
                     @when[(equal? lang "zht")]{
                         @list{
-                            <b>注意！</b> 迷霧通目前是實驗性的測試版軟件。功能有可能隨時發生變化，也有可能有各式各樣嚴重的程式錯誤。<u>特別是Android版本，語言只有英文，且不一定穩定</u>。如果發現任何問題，請到<a href="@|issue-tracker-url|">GitHub</a>報告，幫助我們解決。
+                            <b>注意！</b> 迷霧通目前是實驗性的測試版軟件。功能有可能隨時發生變化，也有可能有各式各樣嚴重的程式錯誤。如果發現任何問題，請到<a href="@|issue-tracker-url|">GitHub</a>報告，幫助我們解決。
                         }
                     }
                     @when[(equal? lang "zhs")]{
                         @list{
-                            <b>注意！ </b> 迷雾通目前是实验性的测试版软件。功能有可能随时发生变化，也有可能有各式各样严重的程序错误。<u>特别是Android版本，语言只有英文，且不一定稳定</u>。如果发现任何问题，请到<a href="@|issue-tracker-url|">GitHub</a>报告，帮助我们解决。
+                            <b>注意！ </b> 迷雾通目前是实验性的测试版软件。功能有可能随时发生变化，也有可能有各式各样严重的程序错误。如果发现任何问题，请到<a href="@|issue-tracker-url|">GitHub</a>报告，帮助我们解决。
                         }
                     }
                 </div>

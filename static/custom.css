@@ -1,6 +1,11 @@
 body {
     background-color: #ffffff;
-    font-family: Arial, "Liberation Sans", sans-serif;
+    font-family: sans-serif;
+}
+
+h5 {
+    font-weight: normal !important;
+    font-style: italic;
 }
 
 #top-bar {
@@ -91,6 +96,7 @@ body {
 .no-margin {
     margin: 0 !important;
     padding: 0 !important;
+    margin-bottom: 15px !important;
 }
 
 .section-hdr {
@@ -99,4 +105,14 @@ body {
 
 h4 {
     margin-bottom: 14px;
+}
+
+.bump {
+    margin-left: 15px;
+}
+
+@media (min-width: 768px) {
+    .bump {
+        margin-left: 30px;
+    }
 }

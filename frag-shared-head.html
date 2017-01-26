@@ -2,8 +2,10 @@
 <head>
     <meta charset="utf-8">
     <title>@|title|</title>
-    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="@|title|" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta property="og:image" content="https://geph.io/bridge.jpg">
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -14,6 +16,7 @@
     <link rel="alternate" hreflang="zh-TW" href="https://geph.io/zht">
     <link rel="alternate" hreflang="zh-CN" href="https://geph.io/zhs">
     <link rel="alternate" hreflang="zh" href="https://geph.io/zht">
+
     @when[(equal? lang "zhs")]{
         @list{
             <style>

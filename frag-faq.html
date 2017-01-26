@@ -1,5 +1,131 @@
-@define[(accordion-entry id)]{
-    @list{
-        
-    }
-}
+<div class="row">
+    <div class="col col-12">
+        <h2 class="section-hdr">
+            <img src='@(static-link "icons/mi_question_answer.svg" is-mirror?)' class="hdr-icon">
+            @when[(equal? lang "en")]{
+                @list{Frequently asked questions}
+            }
+            @when[(equal? lang "zht")]{
+                @list{常見問題}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{常见问题}
+            }
+        </h2>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-12 col-sm-12">
+        <h5 id="geph-what-different">
+            @when[(equal? lang "en")]{
+                @list{What's different about Geph?}
+            }
+            @when[(equal? lang "zht")]{
+                @list{迷霧通有何不同之處？}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{迷雾通有何不同之处？ }
+            }
+        </h5>
+        @when[(equal? lang "en")]{
+            @list{
+                <p class="bump">There is indeed a large number of censorship circumvention software available on the Internet, such as VPNs, encrypted proxies, etc. However, traditional circumvention software tend to rely on keeping a low profile and hoping censors turn a blind eye, as sophisticated national censors, such as China, can easily block such programs if they want to.</p>
+
+                <p class="bump">On the other hand, Geph is designed from the ground up with the assumption that censors will try earnestly to disrupt access. In order to defeat such disruption, we have applied many state-of-the-art censorship resistance techniques from the research community, such as domain fronting and protocol obfuscation, which currently see little-use in user-friendly circumvention software.</p>
+            }
+        }
+        @when[(equal? lang "zht")]{
+            @list{
+                <p class="bump">的確，網上五花八門的「翻牆軟件」比比皆是。但傳統的翻牆軟件，如VPN以及加密代理，基本依賴不被審查者發現，抑或被審查者默許（比如面向海外旅客的付費VPN）。對於先進的審查制度，如中國大陸的「防火長城」，若當局有決心，不費吹灰之力就可以屏蔽這類翻牆軟件。</p>
+
+                <p class="bump">但另一方面，迷霧通從設計上就默認，國家級審查機構的針對性屏蔽無法避免。爲了對抗屏蔽，我們實現了學術界多種前沿的抗網絡屏蔽技術，希望可以將這些對抗互聯網封鎖的利器，率先應用到普通網民身邊的翻牆工具。</p>
+            }
+        }
+        @when[(equal? lang "zhs")]{
+            @list{
+                <p class="bump">的确，网上五花八门的「翻墙软件」比比皆是。但传统的翻墙软件，如VPN以及加密代理，基本依赖不被审查者发现，抑或被审查者默许（比如面向海外旅客的付费VPN）。对于先进的审查制度，如中国大陆的「防火长城」，若当局有决心，不费吹灰之力就可以屏蔽这类翻墙软件。 </p>
+
+                <p class="bump">但另一方面，迷雾通从设计上就默认，国家级审查机构的针对性屏蔽无法避免。为了对抗屏蔽，我们实现了学术界多种前沿的抗网络屏蔽技术，希望可以将这些对抗互联网封锁的利器，率先应用到普通网民身边的翻墙工具。 </p>
+            }
+        }
+        <h5 id="geph-free">
+            @when[(equal? lang "en")]{
+                @list{Will Geph accounts always be free?}
+            }
+            @when[(equal? lang "zht")]{
+                @list{迷霧通帳號是否會永久免費？}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{迷雾通帐号是否会永久免费？ }
+            }
+        </h5>
+        @when[(equal? lang "en")]{
+            @list{
+                <p class="bump">We believe that Internet freedom is a basic right, and thus promise to always offer free accounts with at least the features they have currently. </p>
+            }
+        }
+        @when[(equal? lang "zht")]{
+            @list{
+                <p class="bump">我們堅持認爲，連接自由的互聯網是一項基本人權。因此，我們會永久提供免費帳號，且保證功能不會較目前有任何減少。</p>
+            }
+        }
+        @when[(equal? lang "zhs")]{
+            @list{
+                <p class="bump">我们坚持认为，连接自由的互联网是一项基本人权。因此，我们会永久提供免费帐号，且保证功能不会较目前有任何减少。 </p>
+            }
+        }
+        <h5 id="geph-free">
+            @when[(equal? lang "en")]{
+                @list{Why is there a monthly bandwidth cap for accounts?}
+            }
+            @when[(equal? lang "zht")]{
+                @list{爲什麼限制每月的使用流量？}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{为什么限制每月的使用流量？ }
+            }
+        </h5>
+        @when[(equal? lang "en")]{
+            @list{
+                <p class="bump">We limit bandwidth usage every month to 1 GB per account. This is to ensure that all users can have a fair share of a scarce resource. However, we recognize that this is insufficient in some cases, and thus in the future we will allow users to buy as much additional bandwidth as they need.</p>
+            }
+        }
+        @when[(equal? lang "zht")]{
+            @list{
+                <p class="bump">每一位用戶的流量使用被限制在每月1GB，是爲了保證所有人都可以公平地使用服務器的資源。不過，我們承認這個限制在某些情況下過於苛刻。未來，我們將會允許用戶花錢購買額外流量，也會根據使用情況考慮放寬免費用戶的流量限制。</p>
+            }
+        }
+        @when[(equal? lang "zhs")]{
+            @list{
+                <p class="bump">每一位用户的流量使用被限制在每月1GB，是为了保证所有人都可以公平地使用服务器的资源。不过，我们承认这个限制在某些情况下过于苛刻。未来，我们将会允许用户花钱购买额外流量，也会根据使用情况考虑放宽免费用户的流量限制。 </p>
+            }
+        }
+        <h5 id="geph-free">
+            @when[(equal? lang "en")]{
+                @list{Does Geph make me anonymous online?}
+            }
+            @when[(equal? lang "zht")]{
+                @list{迷霧通是否可以徹底隱蔽我的網上身份？}
+            }
+            @when[(equal? lang "zhs")]{
+                @list{迷雾通是否可以彻底隐蔽我的网上身份？ }
+            }
+        </h5>
+        @when[(equal? lang "en")]{
+            @list{
+                <p class="bump"><b>Geph is not an Internet anonymity tool,</b> though it does help hide your tracks by obscuring your real IP address. For robust anonymity online, we recommend using <a href="https://torproject.org">Tor</a> instead, which can also be used in conjunction with Geph for censorship resistance.</p>
+            }
+        }
+        @when[(equal? lang "zht")]{
+            @list{
+                <p class="bump"><b>迷霧通並不是匿名上網工具，</b>雖然因爲隱藏了您的IP地址，或多或少會隱蔽您的上網蹤跡。若需要高強度的反偵查隱蔽上網，我們推薦使用<a href="https://torproject.org">Tor</a>。在Tor被屏蔽的國家也可以使用迷霧通幫助Tor翻牆。</p>
+            }
+        }
+        @when[(equal? lang "zhs")]{
+            @list{
+                <p class="bump"><b>迷雾通并不是匿名上网工具，</b>虽然因为隐藏了您的IP地址，或多或少会隐蔽您的上网踪迹。若需要高强度的反侦查隐蔽上网，我们推荐使用<a href="https://torproject.org">Tor</a>。在Tor被屏蔽的国家也可以使用迷雾通帮助Tor翻墙。 </p>
+            }
+        }
+    </div>
+</div>
