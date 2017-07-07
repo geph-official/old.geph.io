@@ -9,7 +9,7 @@
   ;; replace download URLs
   (regexp-replace* #rx"dl.geph.io"
                    source-code
-                   "s3.ap-southeast-1.amazonaws.com/geph-mirror/dl"))
+                   "s3.ap-southeast-1.amazonaws.com/geph-mirror-sgp/dl"))
 
 (with-output-to-file "ZHS-STATIC.html"
   (lambda() (display (generate-mirror))))
