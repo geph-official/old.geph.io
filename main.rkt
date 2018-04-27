@@ -3,6 +3,7 @@
          web-server/dispatch
          web-server/servlet
          web-server/servlet-env)
+(require (for-syntax racket))
 
 (define (auto-jump req)
   (define best-lang
@@ -11,7 +12,6 @@
        (first (string-split
               (extract-binding/single 'accept-language
                                       (request-headers req)) ",")))))
-  #;(printf "best lang is ~a\n" best-lang)
   (response/full 302
                  #"Found"
                  (current-seconds)

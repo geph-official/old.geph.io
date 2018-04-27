@@ -11,5 +11,5 @@
                    source-code
                    "s3-ap-southeast-1.amazonaws.com/geph-mirror-sgp/dl"))
 
-(with-output-to-file "ZHS-STATIC.html"
+(with-output-to-file #:exists 'replace "ZHS-STATIC.html"
   (lambda() (display (generate-mirror))))
