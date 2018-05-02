@@ -81,7 +81,7 @@
                 <footer>
                     <p>
                         <small class="text-muted">
-                            © 2018- Gephyra OÜ<br>
+                            © 2018- Geph Project<br>
                             Code licensed under Apache and GPLv3, website under
                             <a href="https://creativecommons.org/licenses/by-nd/4.0/">CC-BY-NC-ND 4.0</a>
                         </small>
@@ -109,6 +109,7 @@
 
     <!-- Remove wechat from the premises! -->
     <!-- From github.com/kujian/weixinTip -->
+    @(define xxx (static-link "live_weixin.png" is-mirror?))
     <script type="text/javascript">
 		function is_weixin() {
 		    var ua = navigator.userAgent.toLowerCase();
@@ -120,7 +121,6 @@
 		}
 		var isWeixin = is_weixin();
 		var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
-        @(define xxx (static-link "live_weixin.png" is-mirror?))
 		var weixinTip = '<div id="weixinTip"><div id="weixinInner"></div></div>';
 
 		if(isWeixin){
