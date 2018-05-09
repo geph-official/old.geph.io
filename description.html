@@ -22,7 +22,7 @@
             <select class="form-control" id="langselect">
                 <option value="//geph.io/en" @when[(equal? lang "en")]{selected}>English</option>
                 <option value="//geph.io/zhs" @when[(equal? lang "zhs")]{selected}>简体中文</option>
-                <option value="https://s3s3-ap-southeast-1.amazonaws.com/geph-mirror-seo/ZHS-STATIC.html" @when[is-mirror?]{selected}>
+                <option value="https://s3-ap-southeast-1.amazonaws.com/geph-mirror-seo/ZHS-STATIC.html" @when[is-mirror?]{selected}>
                     简体中文（镜像）</option>
                 <option value="//geph.io/zht" @when[(equal? lang "zht")]{selected}>正體中文</option>
             </select>
