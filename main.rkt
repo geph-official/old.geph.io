@@ -35,7 +35,7 @@
                    TEXT/HTML-MIME-TYPE
                    `()
                    (list (string->bytes/utf-8
-                          (include-template "description.html"))))))
+                          (include-template "fragments/main/description.html"))))))
 
 (define-values (page-dispatch url)
   (dispatch-rules
