@@ -2,7 +2,8 @@
 (require web-server/templates
          web-server/dispatch
          web-server/servlet
-         web-server/servlet-env)
+         web-server/servlet-env
+         "billing.rkt")
 (require (for-syntax racket))
 
 (define (auto-jump req)
@@ -39,6 +40,7 @@
 
 (define-values (page-dispatch url)
   (dispatch-rules
+   [("billing" "login") serve-login]
    [("restart-servlet") #:method "post"
                         (λ _ (thread (lambda() (sleep 1)
                                        (exit-global 0)))
