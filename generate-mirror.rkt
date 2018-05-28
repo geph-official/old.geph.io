@@ -5,7 +5,7 @@
   (define is-mirror? #t)
   (define source-code
     (let ([lang "zhs"])
-      (include-template "description.html")))
+      (include-template "fragments/main/description.html")))
   ;; replace download URLs
   (regexp-replace* #rx"dl.geph.io"
                    source-code
