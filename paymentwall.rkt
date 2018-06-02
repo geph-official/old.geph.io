@@ -1,6 +1,7 @@
 #lang racket
 (require "paymentwall-secrets.rkt"
          sha)
+(provide widget-url)
 
 (define (widget-url
          #:userid uid
@@ -39,11 +40,3 @@
    (string-append* (for/list ([p pairs])
                      (format "~a=~a&" (car p) (cdr p))))
    "sign=" signature))
-
-(widget-url
- #:userid 2
- #:amount 1000
- #:currency-code "CNY"
- #:order-name "TEST"
- #:order-id 12345
- #:payment-type "all")

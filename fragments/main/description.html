@@ -1,5 +1,6 @@
 @(local-require web-server/templates)
 @(local-require "static-link.rkt")
+@(define lang (current-website-language))
 @(define lcode
     (match lang
         ["en" "en"]

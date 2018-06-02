@@ -1,0 +1,35 @@
+@(define lang (current-website-language))
+@(define lcode
+    (match lang
+        ["en" "en"]
+        ["zht" "zh-TW"]
+        ["zhs" "zh-CN"]))
+@(define title (l10n 'billing.dashboard.title))
+<!DOCTYPE html>
+<html lang="@|lcode|">
+@(include-template "head.html")
+<body>
+    <!-- <div id="top-bar">
+        <img src="/logo-@|lang|.png" alt="Geph" id="logo">
+        <div class="text-xs-right text-white">
+            Testy Test
+        </div>
+    </div> -->
+    <nav class="nav-container">
+        <ul class="nav-ul">
+            <li><a href="#"><i class="material-icons">dashboard</i> Dashboard</a></li>
+        </ul>
+    </nav>
+    <div class="container-fluid main-body">
+        <div class="col">
+            <h1>Billing dashboard for user @(list uname)</h1>
+
+            <form action="/billing/buyplus" method="get">
+                <label for="months">Months to buy</label>
+                <input type="number" class="form-control" name="months" id="months" value="1">
+                <input type="hidden" name="cookie" id="cookie" value="@(list cookie)">
+                <button type="submit" class="btn btn-primary">Buy!!!</button>
+            </form>
+        </div>
+    </div>
+</body>
