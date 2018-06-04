@@ -2,6 +2,7 @@
 (require db
          "l10n.rkt"
          "paymentwall.rkt"
+         "paymentwall-secrets.rkt"
          web-server/templates
          racket/random
          file/sha1)
@@ -137,7 +138,9 @@ plan = excluded.plan, expires = excluded.expires"
                    '()
                    '())))
 
-(define (serve-buyplus req)
+(define (serve-buyplus req secret)
+  (unless (equal? secret pw-skey)
+    (error "unauthorized"))
   (parameterize ([current-website-language (request-language req)])
     (define bindings (request-bindings req))
     (define cookie (extract-binding/single 'cookie bindings))
