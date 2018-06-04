@@ -2,7 +2,8 @@
 (require web-server/servlet)
 (provide current-website-language
          request-language
-         l10n)
+         l10n
+         lang->standard-lang)
 
 (define current-website-language (make-parameter "en"))
 

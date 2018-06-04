@@ -138,22 +138,24 @@ plan = excluded.plan, expires = excluded.expires"
                    '())))
 
 (define (serve-buyplus req)
-  (define bindings (request-bindings req))
-  (define cookie (extract-binding/single 'cookie bindings))
-  (define uid (check-cookie cookie))
-  (define months (string->number (extract-binding/single 'months bindings)))
-  (define invoice-id (make-invoice uid months))
-  (define payment-url
-    (widget-url #:currency-code "EUR"
-                #:amount (* months PRICE-IN-EUROS 100)
-                #:order-name (format "~a Plus" (l10n 'main.geph))
-                #:order-id invoice-id
-                #:payment-type "all"))
+  (parameterize ([current-website-language (request-language req)])
+    (define bindings (request-bindings req))
+    (define cookie (extract-binding/single 'cookie bindings))
+    (define uid (check-cookie cookie))
+    (define months (string->number (extract-binding/single 'months bindings)))
+    (define invoice-id (make-invoice uid months))
+    (define payment-url
+      (widget-url #:currency-code "EUR"
+                  #:amount (* months PRICE-IN-EUROS 100)
+                  #:order-name (format "~a Plus" (l10n 'main.geph))
+                  #:order-id invoice-id
+                  #:payment-type "all"
+                  #:lang (lang->standard-lang (current-language-code))))
   
-  (response/full 302
-                 #"Found"
-                 (current-seconds)
-                 TEXT/HTML-MIME-TYPE
-                 (list (make-header #"Location"
-                                    (string->bytes/utf-8 payment-url)))
-                 '()))
+    (response/full 302
+                   #"Found"
+                   (current-seconds)
+                   TEXT/HTML-MIME-TYPE
+                   (list (make-header #"Location"
+                                      (string->bytes/utf-8 payment-url)))
+                   '())))
