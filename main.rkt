@@ -40,6 +40,7 @@
    [("billing" "login") serve-login]
    [("billing" "dashboard") serve-dashboard]
    [("billing" "buyplus") serve-buyplus]
+   [("billing" "pingback") serve-pingback]
    [("restart-servlet") #:method "post"
                         (λ _ (thread (lambda() (sleep 1)
                                        (exit-global 0)))

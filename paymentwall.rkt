@@ -4,7 +4,6 @@
 (provide widget-url)
 
 (define (widget-url
-         #:userid uid
          #:amount amt
          #:currency-code ccode
          #:order-name ordername
@@ -12,11 +11,10 @@
          #:payment-type ps
          #:country (country "CN")
          #:language (lang "en"))
-  (define uname (format "user~a" uid))
   (define kvs (hash "key" pw-key
-                    "uid" uname
+                    "uid" (format "~a" orderid)
                     "widget" "pw_1"
-                    "email" (format "~a@users.geph.io" uid)
+                    "email" (format "~a@orders.geph.io" orderid)
                     "timestamp" (format "~a" (current-seconds))
                     "amount" (format "~a" (/ amt 100.0))
                     "currencyCode" ccode

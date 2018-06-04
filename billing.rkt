@@ -7,7 +7,8 @@
          file/sha1)
 (provide serve-login
          serve-dashboard
-         serve-buyplus)
+         serve-buyplus
+         serve-pingback)
 
 ;; db connection for postgres
 (define db-conn
@@ -115,25 +116,31 @@ plan = excluded.plan, expires = excluded.expires"
                           (include-template "fragments/billing/dashboard.html"))))))
 
 (define (in-transaction tx)
-  (query-exec db-conn "BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ")
+  (query-exec db-conn "BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE")
   (with-handlers ([exn? (λ (e)
                           (query-exec db-conn "ROLLBACK")
                           (raise e))])
     (tx)
     (query-exec db-conn "COMMIT")))
 
+(define (serve-pingback req)
+  (let ([bindings (request-bindings req)]
+        [type (extract-binding/single 'type req)]
+        [invoice-id (extract-binding/single 'uid req)])
+    (printf "Pingback for invoice ~a\n" invoice-id)
+    (pay-invoice (string->number invoice-id))))
 
 (define (serve-buyplus req)
   (define bindings (request-bindings req))
   (define cookie (extract-binding/single 'cookie bindings))
   (define uid (check-cookie cookie))
   (define months (string->number (extract-binding/single 'months bindings)))
+  (define invoice-id (make-invoice uid months))
   (define payment-url
-    (widget-url #:userid uid
-                #:currency-code "USD"
+    (widget-url #:currency-code "USD"
                 #:amount (* months 500)
-                #:order-name (gensym 'ordername)
-                #:order-id (gensym 'orderid)
+                #:order-name (format "~a Plus" (l10n 'main.geph))
+                #:order-id invoice-id
                 #:payment-type "all"))
   
   (response/full 302
