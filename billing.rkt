@@ -128,8 +128,14 @@ plan = excluded.plan, expires = excluded.expires"
   (let* ([bindings (request-bindings req)]
          [type (extract-binding/single 'type bindings)]
          [invoice-id (extract-binding/single 'uid bindings)])
-    (printf "Pingback for invoice ~a\n" invoice-id)
-    (pay-invoice (string->number invoice-id))))
+    (printf "Pingback for invoice ~a!!\n" invoice-id)
+    (pay-invoice (string->number invoice-id))
+    (response/full 200
+                   #"OK"
+                   (current-seconds)
+                   TEXT/HTML-MIME-TYPE
+                   '()
+                   '())))
 
 (define (serve-buyplus req)
   (define bindings (request-bindings req))
@@ -138,8 +144,8 @@ plan = excluded.plan, expires = excluded.expires"
   (define months (string->number (extract-binding/single 'months bindings)))
   (define invoice-id (make-invoice uid months))
   (define payment-url
-    (widget-url #:currency-code "USD"
-                #:amount (* months 500)
+    (widget-url #:currency-code "EUR"
+                #:amount (* months PRICE-IN-EUROS 100)
                 #:order-name (format "~a Plus" (l10n 'main.geph))
                 #:order-id invoice-id
                 #:payment-type "all"))
