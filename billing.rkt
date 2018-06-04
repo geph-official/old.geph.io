@@ -125,9 +125,9 @@ plan = excluded.plan, expires = excluded.expires"
     (query-exec db-conn "COMMIT")))
 
 (define (serve-pingback req)
-  (let ([bindings (request-bindings req)]
-        [type (extract-binding/single 'type bindings)]
-        [invoice-id (extract-binding/single 'uid bindings)])
+  (let* ([bindings (request-bindings req)]
+         [type (extract-binding/single 'type bindings)]
+         [invoice-id (extract-binding/single 'uid bindings)])
     (printf "Pingback for invoice ~a\n" invoice-id)
     (pay-invoice (string->number invoice-id))))
 
