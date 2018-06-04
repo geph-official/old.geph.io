@@ -125,7 +125,9 @@ plan = excluded.plan, expires = excluded.expires"
     (tx)
     (query-exec db-conn "COMMIT")))
 
-(define (serve-pingback req)
+(define (serve-pingback req secret)
+  (unless (equal? secret pw-skey)
+    (error "unauthorized"))
   (let* ([bindings (request-bindings req)]
          [type (extract-binding/single 'type bindings)]
          [invoice-id (extract-binding/single 'uid bindings)])
@@ -138,9 +140,7 @@ plan = excluded.plan, expires = excluded.expires"
                    '()
                    '())))
 
-(define (serve-buyplus req secret)
-  (unless (equal? secret pw-skey)
-    (error "unauthorized"))
+(define (serve-buyplus req)
   (parameterize ([current-website-language (request-language req)])
     (define bindings (request-bindings req))
     (define cookie (extract-binding/single 'cookie bindings))
