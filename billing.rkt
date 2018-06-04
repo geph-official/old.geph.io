@@ -126,8 +126,8 @@ plan = excluded.plan, expires = excluded.expires"
 
 (define (serve-pingback req)
   (let ([bindings (request-bindings req)]
-        [type (extract-binding/single 'type req)]
-        [invoice-id (extract-binding/single 'uid req)])
+        [type (extract-binding/single 'type bindings)]
+        [invoice-id (extract-binding/single 'uid bindings)])
     (printf "Pingback for invoice ~a\n" invoice-id)
     (pay-invoice (string->number invoice-id))))
 
