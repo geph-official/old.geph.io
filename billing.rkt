@@ -150,7 +150,7 @@ plan = excluded.plan, expires = excluded.expires"
                   #:order-name (format "~a Plus" (l10n 'main.geph))
                   #:order-id invoice-id
                   #:payment-type "all"
-                  #:lang (lang->standard-lang (current-website-language))))
+                  #:language (lang->standard-lang (current-website-language))))
   
     (response/full 302
                    #"Found"
