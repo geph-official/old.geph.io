@@ -21,9 +21,9 @@
 
 (define (lang->standard-lang lang)
   (match lang
-    ["zhs" "zh-CN"]
-    ["zht" "zh-TW"]
-    ["en" "en-US"]))
+    ["zhs" "zh_CN"]
+    ["zht" "zh_TW"]
+    ["en" "en"]))
 
 (define (read-lang-csv csv)
   (with-input-from-file csv
