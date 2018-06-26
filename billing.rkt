@@ -64,7 +64,7 @@
                       (string->bytes/utf-8 (string-append next-url
                                                           "?cookie="
                                                           cookie)))
-         (list (make-header #"Cache-Control" #"no-store")))
+         (make-header #"Cache-Control" #"no-store"))
    (list #"")))
 
 (define PRICE-IN-EUR 3.98)
