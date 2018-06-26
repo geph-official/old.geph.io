@@ -191,7 +191,7 @@ plan = excluded.plan, expires = excluded.expires"
                  (current-seconds)
                  TEXT/HTML-MIME-TYPE
                  '()
-                 '()))
+                 '(#"OK")))
 
 (define (serve-buyplus req)
   (parameterize ([current-website-language (request-language req)])
