@@ -1,0 +1,38 @@
+@(define lang (current-website-language)) @(define lcode (match lang ["en" "en"] ["zht" "zh-TW"] ["zhs" "zh-CN"])) @(define title (l10n 'billing.title))
+<!DOCTYPE html>
+<html lang="@|lcode|">
+@(include-template "head.html")
+
+<body style="background-color: #0d0015; ">
+    <div class="container">
+        <!-- first row: just the logo -->
+        <div class="row mt-5">
+            <div class="col text-center">
+                <img src="/logo.png"
+                    style="width: 128px">
+            </div>
+        </div>
+        <!-- second row: the form -->
+        <div class="row mt-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center">
+                <form class="text-small" action="/billing/login" method="get">
+                    <input type="hidden" name="next" value="/billing/dashboard">
+                    <div class="form-group">
+                        <input type="text" name="uname" class="form-control input-inverted"
+                            placeholder="@(l10n 'billing.username)">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="pwd" class="form-control input-inverted"
+                            placeholder="@(l10n 'billing.password)" id="pword-box">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"
+                            id="login-btn">@(l10n 'billing.login)</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</body>

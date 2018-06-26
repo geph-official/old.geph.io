@@ -1,36 +1,12 @@
 body {
     background-color: #ffffff;
-    font-family: sans-serif;
+    font-family: LatoLatinWeb, sans-serif;
 }
 
 h5 {
     font-weight: normal !important;
     font-style: italic;
 }
-
-#top-bar {
-    height: 48px;
-    line-height: 48px;
-    background-color: #0d0015;
-    width: 100%;
-    position: fixed;
-    z-index: 1000;
-}
-
-#top-bar-pad {
-    height: 48px;
-}
-
-@media (min-width: 768px) {
-    #top-bar {
-        height: 56px;
-        line-height: 56px;
-    }
-    #top-bar-pad {
-        height: 56px;
-    }
-}
-
 #big-header {
     background-size: cover;
     margin-bottom: 40px;

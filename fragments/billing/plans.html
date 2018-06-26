@@ -1,0 +1,88 @@
+@(define lang (current-website-language)) @(define lcode (match lang ["en" "en"] ["zht" "zh-TW"] ["zhs" "zh-CN"])) @(define title (l10n 'billing.buytitle))
+<!DOCTYPE html>
+<html lang="@|lcode|">
+@(include-template "head.html")
+
+<body>
+    @(include-template "topbar.html")
+    <div class="main-body">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col">
+                    <h1 class="page-header">@(l10n (string->symbol (format "billing.~aheader" (extract-binding/single 'flavor bindings))))</h1>
+                    <p class="text-muted page-header-desc">@(l10n 'billing.buysubheader)</p>
+                    <hr>
+                </div>
+            </div>
+
+            <!-- Step 1: select plan -->
+            <div class="row mt-4">
+                <div class="col">
+                    <h3 class="pay-step"><span class="badge badge-secondary">@(l10n 'billing.step1)</span> @(l10n 'billing.chooseplan)</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div id="onemonth" class="card text-center plan-card shadow-sm">
+                        <strong>@(l10n 'billing.1monthplan)</strong><br>
+                        <span class="price-shout">@(currency-ticker)@(* 2 (base-price))</span><br>
+                        <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
+                        <span> <span class="badge badge-pill badge-secondary" style="width: auto">
+                            @(l10n 'billing.save) 0%</span> </span><hr>
+                        <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 2 (base-price))) (l10n 'billing.month))</small>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div id="oneyear" class="card text-center plan-card shadow-sm">
+                        <strong>@(l10n 'billing.1yearplan)</strong><br>
+                        <span class="price-shout">@(currency-ticker)@(* 1 (base-price))</span><br>
+                        <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
+                        <span> <span class="badge badge-pill badge-success" style="width: auto">
+                            @(l10n 'billing.save) 50%</span> </span><hr>
+                        <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 12 (base-price))) (l10n 'billing.year))</small>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div id="sixmonths" class="card text-center plan-card shadow-sm">
+                        <strong>@(l10n 'billing.6monthplan)</strong><br>
+                        <span class="price-shout">@(currency-ticker)@(* 1.5 (base-price))</span><br>
+                        <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
+                        <span> <span class="badge badge-pill badge-warning" style="width: auto">
+                            @(l10n 'billing.save) 25%</span> </span><hr>
+                        <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 1.5 6 (base-price))) (l10n 'billing.6months))</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: payment -->
+            <div class="row mt-4">
+                <div class="col">
+                    <h3 class="pay-step"><span class="badge badge-secondary">@(l10n 'billing.step2)</span> @(l10n 'billing.pay)</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow-sm p-5">
+                        <h4 class="text-success" id="total-price">zzz</h4>
+                        <p class="text-muted">
+                            <b>@(l10n 'billing.gephplus) <span id="plan-description"></span></b>
+                        </p>
+                        <hr>
+                        <p class="text-small">
+                            <span class="material-icons text-danger">warning</span> @(l10n 'billing.formwarning)<br>
+                            <span class="material-icons text-info">info</span> @(l10n 'billing.followinstructions)
+                        </p>
+                        <form action="/billing/buyplus" method="get">
+                            <input type="hidden" name="months" id="months" value="0">
+                            <input type="hidden" name="cookie" id="cookie" value="@(extract-bindings 'cookie bindings)">
+                            <button type="submit" class="btn btn-primary">@(l10n 'billing.continuepay)</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @(include-template "../main/footer.html")
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <script src="/plans.js"></script>
+</body>

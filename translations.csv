@@ -1,3 +1,48 @@
 key,en,zhs,zht
 main.geph,Geph,迷雾通,迷霧通
-billing.dashboard.title,Account Dashboard,帐户管理中心,帳戶管理中心
+billing.username,Username,用户名,用戶名
+billing.password,Password,密码,密碼
+billing.login,Log in,登录,登錄
+billing.title,Account,帐户管理,帳戶管理
+billing.account,Account info,帐户信息,帳戶信息
+billing.username,Username,用戶名,用戶名
+billing.expirytime,Subscription expiry,Plus帐户期限,Plus帳戶期限
+billing.unlimited,Unlimited,无限,無限
+billing.daysleftformat,~a days left,剩的余~a天,剩餘~a天
+billing.freeusage,Bandwidth limit,流量限制,流量限制
+billing.freeusagedesc,Free Geph users are given a monthly bandwidth quota of 1000 MB,免费帐户每月有1000MB的流量限制,免費帳戶每月有1000MB的流量限制
+billing.upgradeaccount,Upgrade to Geph Plus,升级到Plus帐户,升級到Plus帳戶
+billing.subscription,Subscription,帐户类型,帳戶類型
+billing.plus,Plus,Plus,Plus
+billing.gephplus,Geph Plus,迷雾通Plus,迷霧通Plus
+billing.free,Free,免费,免費
+billing.regitime,Registration time,注册日期,註冊日期
+billing.plusblurb,Upgrade to a premium Plus account to enjoy unlimited bandwidth and faster speeds for as low as <b class="text-success">€3.98/month!</b>,升级到Plus帐户，享受无限流量和飞快的网速！<b class="text-success">每月只需￥29.98人民币</b>,升級到Plus帳戶，享受無限流量和飛快的網速！<b class="text-success">每月只需€3.99</b>
+billing.transhistory,Transaction history,交易记录,交易記錄
+billing.transdate,Payment date,交易日期,交易日期
+billing.transexpiry,New expiry time,所购买帐户期限,所購買帳戶期限
+billing.transcurrency,Currency,货币,貨幣
+billing.transamount,Amount,金额,金額
+billing.logout,Log out,登出,登出
+billing.buytitle,Buy Plus,订购Plus,訂購Plus
+billing.buybutton,See plans,马上订购,馬上訂購
+billing.extendbutton,Extend time,订购更多时间,訂購更多時間
+billing.buyheader,Buy a Plus subscription,订购迷雾通Plus帐户,訂購迷霧通Plus帳戶
+billing.extendheader,Extend your Plus subscription,延长迷雾通Plus帐户,延長迷霧通Plus帳戶
+billing.buysubheader,Plans will activate once payment is made and cancel automatically when they expire.,无限流量时长从支付的时刻算起，过期后自动降级到免费帐户。,無限流量時長從支付的時刻算起，過期後自動降級到免費帳戶。
+billing.step1,Step 1,第一步,第一步
+billing.chooseplan,Choose a plan length,选择时长,選擇時長
+billing.step2,Step 2,第二步,第二步
+billing.pay,Pay for plan,付款,付款
+billing.1monthplan,1-month plan,一个月无限流量,一個月無限流量
+billing.6monthplan,6-month plan,半年无限流量,半年無限流量
+billing.1yearplan,1-year plan,一年无限流量,一年無限流量
+billing.6months,6 months,六个月,六個月
+billing.month,month,月,月
+billing.permonth,per month,(每月费用),(每月費用)
+billing.year,year,年,年
+billing.save,Save,节省,節省
+billing.billformat,<b>~a</b> billed every ~a,总共付<b>~a</b>/~a,總共付<b>~a</b>/~a
+billing.formwarning,By submitting this form&#44; you agree to our <a href="/tos.pdf">Terms of Service</a> and <a href="https://is.gd/ygjuMU">Privacy Policy</a>.,提交此表格即表示您同意我们的<a href="/tos.pdf">服务条款</a>和<a href="https://is.gd/ygjuMU">隐私政策</a>。,提交此表格即表示您同意我們的<a href="/tos.pdf">服務條款</a>和<a href="https://is.gd/ygjuMU">隱私政策</a>。
+billing.followinstructions,Follow the instructions on the screen to complete your purchase.,点击「继续」后，请按照屏幕上的说明完成订购。,點擊「繼續」後，請按照屏幕上的說明完成訂購。
+billing.continuepay,Continue,继续,繼續

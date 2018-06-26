@@ -1,6 +1,5 @@
 @(local-require web-server/templates)
 @(local-require "static-link.rkt")
-@(define lang (current-website-language))
 @(define lcode
     (match lang
         ["en" "en"]
@@ -19,7 +18,8 @@
         @unless[is-mirror?]{@list{<img src="logo-@|lang|.png" alt="Geph" id="logo">}}
         @when[is-mirror?]{@list{<img src='@(static-link "logo-zhs-mirror.png" is-mirror?)'
             alt="Geph" id="logo">}}
-        <div class="text-xs-right text-white">
+        <div class="float-right text-xs-right text-white">
+            <a href="/billing" class="mr-3"><button type="button" class="btn btn-sm btn-primary">@(l10n 'billing.title)</button></a>
             <select class="form-control" id="langselect">
                 <option value="//geph.io/en" @when[(equal? lang "en")]{selected}>English</option>
                 <option value="//geph.io/zhs" @when[(equal? lang "zhs")]{selected}>简体中文</option>
@@ -76,18 +76,7 @@
 
         @(include-template "frag-faq.html")
 
-        <div class="row">
-            <div class="col col-12">
-                <hr>
-                <footer>
-                    <p>
-                        <small class="text-muted">
-                            © 2018- Gephyra OÜ · Sepapaja 6, Tallinn 15551, Estonia · <a href="mailto:contact@"@"geph.io">contact@"@"geph.io</a>
-                        </small>
-                    </p>
-                </footer>
-            </div>
-        </div>
+        @(include-template "footer.html")
     </div>
 
     <!-- JS below this line -->

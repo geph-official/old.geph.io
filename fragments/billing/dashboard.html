@@ -1,35 +1,135 @@
-@(define lang (current-website-language))
-@(define lcode
-    (match lang
-        ["en" "en"]
-        ["zht" "zh-TW"]
-        ["zhs" "zh-CN"]))
-@(define title (l10n 'billing.dashboard.title))
+@(define lang (current-website-language)) @(define lcode (match lang ["en" "en"] ["zht" "zh-TW"] ["zhs" "zh-CN"])) @(define title (l10n 'billing.title))
 <!DOCTYPE html>
 <html lang="@|lcode|">
 @(include-template "head.html")
-<body>
-    <!-- <div id="top-bar">
-        <img src="/logo-@|lang|.png" alt="Geph" id="logo">
-        <div class="text-xs-right text-white">
-            Testy Test
-        </div>
-    </div> -->
-    <nav class="nav-container">
-        <ul class="nav-ul">
-            <li><a href="#"><i class="material-icons">dashboard</i> Dashboard</a></li>
-        </ul>
-    </nav>
-    <div class="container-fluid main-body">
-        <div class="col">
-            <h1>Billing dashboard for user @(list uname)</h1>
 
-            <form action="/billing/buyplus" method="get">
-                <label for="months">Months to buy</label>
-                <input type="number" class="form-control" name="months" id="months" value="1">
-                <input type="hidden" name="cookie" id="cookie" value="@(list cookie)">
-                <button type="submit" class="btn btn-primary">Buy!!!</button>
-            </form>
+<body>
+    @(include-template "topbar.html")
+    <div class="main-body">
+        <div class="container">
+            @(define-values (uname freebalance createtime) (apply values (vector->list (query-row db-conn "SELECT username,freebalance,createtime FROM users WHERE id = $1" uid)))) @(define (format-date time) (date->string (sql-datetime->srfi-date time)))
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <h3>@(l10n 'billing.account)</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b>@(l10n 'billing.subscription)</b>
+                                    </div>
+                                    <div class="col-sm">
+                                        @when[(equal? "free" user-subscription)]{@list{
+                                            @(l10n 'billing.free)
+                                        }}
+                                        @when[(not (equal? "free" user-subscription))]{@list{
+                                            @(l10n 'billing.plus)
+                                        }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b>@(l10n 'billing.regitime)</b>
+                                    </div>
+                                    <div class="col-sm">
+                                        @(format-date createtime)
+                                    </div>
+                                </div>
+                                <hr>
+                                @(define days-left (if (equal? "free" user-subscription) #f (- (date->julian/scaliger (sql-datetime->srfi-date (cdr user-subscription))) (date->julian/scaliger (seconds->date (current-seconds))))))
+                                @when[(not (equal? "free" user-subscription))]{@list{
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b>@(l10n 'billing.freeusage)</b>
+                                    </div>
+                                    <div class="col-sm">
+                                        <b class="text-success">@(l10n 'billing.unlimited)</b>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <b>@(l10n 'billing.expirytime)</b>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        @(format-date (cdr user-subscription))<br>
+                                        <small><b class='@(if (< days-left 30) "text-danger" "text-muted")'>@(format (l10n 'billing.daysleftformat) days-left)</b></small>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a href="/billing/plans?cookie=@(list cookie)&amp;flavor=extend"><button type="button" class="btn btn-secondary btn-sm">
+                                            @(l10n 'billing.extendbutton)
+                                        </button></a>
+                                    </div>
+                                </div>
+                                }}
+
+                                @when[(equal? "free" user-subscription)]{@list{
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b>@(l10n 'billing.freeusage)</b><br>
+                                        <small class="text-secondary">@(l10n 'billing.freeusagedesc)</small>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="progress" style="height:25px ;background-color:#888888">
+                                            <div class="progress-bar @(if (< freebalance 200) " bg-warning " " ")" role="progressbar" style="width: @(quotient (- 1000 freebalance) 10)%;" aria-valuenow="@(- 1000 freebalance)" aria-valuemin="0" aria-valuemax="1000">
+                                                @(- 1000 freebalance) / 1000 MB
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <b class="text-danger">@(l10n 'billing.upgradeaccount)</b> <br>
+                                        <small class="text-secondary">@(l10n 'billing.plusblurb)</small>
+                                    </div>
+                                    <div class="col-sm">
+                                        <a href="/billing/plans?cookie=@(list cookie)&amp;flavor=buy"><button type="button" class="btn btn-primary">
+                                            @(l10n 'billing.buybutton)
+                                        </button></a>
+                                    </div>
+                                </div>
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <h3>@(l10n 'billing.transhistory)</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        @(define invoices (map vector->list (query-rows db-conn "SELECT createtime, planexpiry, currency, amount FROM invoices WHERE id = $1 AND paid = true" uid)))
+                        <table class="table table-striped mb-0">
+                            <tr>
+                                <th scope="col">@(l10n 'billing.transdate)</th>
+                                <th scope="col">@(l10n 'billing.transexpiry)</th>
+                                <th scope="col">@(l10n 'billing.transcurrency)</th>
+                                <th scope="col">@(l10n 'billing.transamount)</th>
+                            </tr>
+                            @in[r invoices]{
+                                <tr>
+                                    <td>@(format-date (first r))</td>
+                                    <td>@(format-date (second r))</td>
+                                    <td>@(third r)</td>
+                                    <td>@(/ (fourth r) 100.0)</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @(include-template "../main/footer.html")
         </div>
     </div>
 </body>

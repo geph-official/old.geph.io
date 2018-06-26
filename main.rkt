@@ -25,8 +25,10 @@
 
 (define (description language)
   (define is-mirror? #f)
-  (parameterize ([current-website-language language])
-    (lambda _
+  (lambda _
+    (parameterize ([current-website-language language])
+      (displayln (current-website-language))
+      (define lang (current-website-language))
       (response/full 200
                      #"Okay"
                      (current-seconds)
@@ -37,16 +39,12 @@
 
 (define-values (page-dispatch url)
   (dispatch-rules
+   (("billing") serve-user-login)
    [("billing" "login") serve-login]
    [("billing" "dashboard") serve-dashboard]
+   [("billing" "plans") serve-plans]
    [("billing" "buyplus") serve-buyplus]
    [("billing" "pingback" (string-arg)) serve-pingback]
-   [("restart-servlet") #:method "post"
-                        (λ _ (thread (lambda() (sleep 1)
-                                       (exit-global 0)))
-                          (response/full 200 #"Okay" (current-seconds)
-                                         TEXT/HTML-MIME-TYPE
-                                         '() '()))]
    [("en") (description "en")]
    [("zht") (description "zht")]
    [("zhs") (description "zhs")]

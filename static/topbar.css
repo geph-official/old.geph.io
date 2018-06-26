@@ -1,0 +1,29 @@
+
+#top-bar {
+    height: 48px;
+    line-height: 48px;
+    background-color: #0d0015;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+
+#logo {
+    height: 100%;
+    margin-left: 20px;
+    float: left;
+}
+
+#top-bar-pad {
+    height: 48px;
+}
+
+@media (min-width: 768px) {
+    #top-bar {
+        height: 56px;
+        line-height: 56px;
+    }
+    #top-bar-pad {
+        height: 56px;
+    }
+}

@@ -10,7 +10,8 @@
          #:order-id orderid
          #:payment-type ps
          #:country (country "CN")
-         #:language (lang "en"))
+         #:language (lang "en")
+         #:success-url success-url)
   (define kvs (hash "key" pw-key
                     "uid" (format "~a" orderid)
                     "widget" "pw_1"
@@ -23,6 +24,7 @@
                     "ag_type" "fixed"
                     "lang" lang
                     "country_code" country
+                    "success_url" success-url
                     "sign_version" "3"))
   (define pairs (sort (hash->list kvs) (λ(a b) (string<? (car a) (car b)))))
   (define signature

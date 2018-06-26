@@ -1,15 +1,19 @@
 #lang web-server
 (require db
+         db/util/datetime
          "l10n.rkt"
          "paymentwall.rkt"
          "paymentwall-secrets.rkt"
          web-server/templates
          racket/random
+         racket/date
          file/sha1)
 (provide serve-login
          serve-dashboard
          serve-buyplus
-         serve-pingback)
+         serve-pingback
+         serve-plans
+         serve-user-login)
 
 ;; db connection for postgres
 (define db-conn
@@ -28,7 +32,7 @@
   (define uid (uname->uid uname))
   ;; TODO actually validate the pwd!
   (define new-cookie (format "sess~a"
-                              (bytes->hex-string (crypto-random-bytes 20))))
+                             (bytes->hex-string (crypto-random-bytes 20))))
   (hash-set! session-cache new-cookie uid)
   new-cookie)
 
@@ -62,7 +66,18 @@
                                                           cookie))))
    (list #"")))
 
-(define PRICE-IN-EUROS 4)
+(define PRICE-IN-EUR 3.98)
+(define PRICE-IN-CNY 29.98)
+
+(define (base-price)
+  (cond
+    [(equal? "zhs" (current-website-language)) PRICE-IN-CNY]
+    [else PRICE-IN-EUR]))
+
+(define (currency-ticker)
+  (cond
+    [(equal? "zhs" (current-website-language)) "¥"]
+    [else "€"]))
 
 (define (seconds->sql-timestamp secs)
   (let ([current-date (seconds->date secs #f)])
@@ -75,18 +90,23 @@
                    0
                    #f)))
 
-(define (make-invoice uid months)
+(define (make-invoice uid months price code)
+  (define base-seconds
+    (match (query-rows db-conn
+                       "SELECT expires FROM subscriptions WHERE id = $1" uid)
+      [(list (vector expires)) (date->seconds (sql-datetime->srfi-date expires))]
+      [else (current-seconds)]))
   (query-value
    db-conn
    "INSERT INTO invoices (CreateTime, Paid, Amount, Currency, ID, Plan, PlanExpiry)
 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING InvoiceID"
    (seconds->sql-timestamp (current-seconds))
    #f
-   (* PRICE-IN-EUROS months)
-   "EUR"
+   price
+   code
    uid
    "plus"
-   (seconds->sql-timestamp (+ (* months 2592000) (current-seconds)))))
+   (seconds->sql-timestamp (+ (* months 2629800) base-seconds))))
 
 (define (pay-invoice invoice-id)
   (query-exec
@@ -103,11 +123,7 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING InvoiceID"
 plan = excluded.plan, expires = excluded.expires"
       user-id plan-id expires)]))
 
-(define (serve-dashboard req)
-  (define bindings (request-bindings req))
-  (define cookie (extract-binding/single 'cookie bindings))
-  (define uid (check-cookie cookie))
-  (define uname (uid->uname uid))
+(define (serve-user-login req)
   (parameterize ([current-website-language (request-language req)])
     (response/full 200
                    #"Okay"
@@ -115,15 +131,52 @@ plan = excluded.plan, expires = excluded.expires"
                    TEXT/HTML-MIME-TYPE
                    `()
                    (list (string->bytes/utf-8
-                          (include-template "fragments/billing/dashboard.html"))))))
+                          (include-template "fragments/billing/login.html"))))))
+
+(define (serve-plans req)
+  (define bindings (request-bindings req))
+  (parameterize ([current-website-language (request-language req)])
+    (response/full 200
+                   #"Okay"
+                   (current-seconds)
+                   TEXT/HTML-MIME-TYPE
+                   `()
+                   (list (string->bytes/utf-8
+                          (include-template "fragments/billing/plans.html"))))))
+
+(define (serve-dashboard req)
+  (define bindings (request-bindings req))
+  (define cookie (extract-binding/single 'cookie bindings))
+  (define uid (check-cookie cookie))
+  (define user-subscription
+    (let ([rows (query-rows db-conn
+                            "SELECT plan,expires FROM subscriptions WHERE id = $1" uid)])
+      (match rows
+        [(list (vector plan-name expiry)) (cons plan-name expiry)]
+        [_ "free"])))
+
+  (in-transaction
+   (lambda ()
+     (parameterize ([current-website-language (request-language req)])
+       (date-display-format (if (equal? (current-website-language) "en")
+                                'american
+                                'chinese))
+       (response/full 200
+                      #"Okay"
+                      (current-seconds)
+                      TEXT/HTML-MIME-TYPE
+                      `()
+                      (list (string->bytes/utf-8
+                             (include-template "fragments/billing/dashboard.html"))))))))
 
 (define (in-transaction tx)
   (query-exec db-conn "BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE")
   (with-handlers ([exn? (λ (e)
                           (query-exec db-conn "ROLLBACK")
                           (raise e))])
-    (tx)
-    (query-exec db-conn "COMMIT")))
+    (define res (tx))
+    (query-exec db-conn "COMMIT")
+    res))
 
 (define (serve-pingback req secret)
   (unless (equal? secret pw-skey)
@@ -146,15 +199,21 @@ plan = excluded.plan, expires = excluded.expires"
     (define cookie (extract-binding/single 'cookie bindings))
     (define uid (check-cookie cookie))
     (define months (string->number (extract-binding/single 'months bindings)))
-    (define invoice-id (make-invoice uid months))
+    (define-values (price code)
+      (if (equal? (current-website-language) "zhs")
+          (values (* months PRICE-IN-CNY (if (< months 12) 2 1)) "CNY")
+          (values (* months PRICE-IN-EUR (if (< months 12) 2 1)) "EUR")))
+    (define invoice-id (make-invoice uid months (exact-round (* price 100)) code))
     (define payment-url
-      (widget-url #:currency-code "EUR"
-                  #:amount (* months PRICE-IN-EUROS 100)
+      (widget-url #:currency-code code
+                  #:amount (* price 100)
                   #:order-name (format "~a Plus" (l10n 'main.geph))
                   #:order-id invoice-id
                   #:payment-type "all"
-                  #:language (lang->standard-lang (current-website-language))))
-  
+                  #:language (lang->standard-lang (current-website-language))
+                  #:success-url (format "https://geph.io/billing/dashboard?cookie=~a"
+                                        cookie)))
+
     (response/full 302
                    #"Found"
                    (current-seconds)
