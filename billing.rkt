@@ -227,5 +227,5 @@ plan = excluded.plan, expires = excluded.expires"
                    TEXT/HTML-MIME-TYPE
                    (list (make-header #"Location"
                                       (string->bytes/utf-8 payment-url))
-                         (list (make-header #"Cache-Control" #"no-store")))
+                         (make-header #"Cache-Control" #"no-store"))
                    '())))
