@@ -181,17 +181,17 @@ plan = excluded.plan, expires = excluded.expires"
 (define (serve-pingback req secret)
   (unless (equal? secret pw-skey)
     (error "unauthorized"))
-  (let* ([bindings (request-bindings req)]
-         [type (extract-binding/single 'type bindings)]
-         [invoice-id (extract-binding/single 'uid bindings)])
-    (printf "Pingback for invoice ~a!!\n" invoice-id)
-    (pay-invoice (string->number invoice-id))
-    (response/full 200
-                   #"OK"
-                   (current-seconds)
-                   TEXT/HTML-MIME-TYPE
-                   '()
-                   '())))
+  (with-handlers ([exn:fail? void])
+    (let* ([bindings (request-bindings req)]
+           [type (extract-binding/single 'type bindings)]
+           [invoice-id (extract-binding/single 'uid bindings)])
+      (pay-invoice (string->number invoice-id))))
+  (response/full 200
+                 #"OK"
+                 (current-seconds)
+                 TEXT/HTML-MIME-TYPE
+                 '()
+                 '()))
 
 (define (serve-buyplus req)
   (parameterize ([current-website-language (request-language req)])
