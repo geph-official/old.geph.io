@@ -199,10 +199,15 @@ plan = excluded.plan, expires = excluded.expires"
     (define cookie (extract-binding/single 'cookie bindings))
     (define uid (check-cookie cookie))
     (define months (string->number (extract-binding/single 'months bindings)))
+    (define price-multiplier
+      (cond
+        [(< months 6) 2]
+        [(< months 12) 1.5]
+        [else 1]))
     (define-values (price code)
       (if (equal? (current-website-language) "zhs")
-          (values (* months PRICE-IN-CNY (if (< months 12) 2 1)) "CNY")
-          (values (* months PRICE-IN-EUR (if (< months 12) 2 1)) "EUR")))
+          (values (* months PRICE-IN-CNY price-multiplier) "CNY")
+          (values (* months PRICE-IN-EUR price-multiplier) "EUR")))
     (define invoice-id (make-invoice uid months (exact-round (* price 100)) code))
     (define payment-url
       (widget-url #:currency-code code
