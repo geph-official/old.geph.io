@@ -1,5 +1,6 @@
 #lang racket
-(require web-server/templates)
+(require web-server/templates
+         "l10n.rkt")
 
 (define (generate-mirror)
   (define is-mirror? #t)
