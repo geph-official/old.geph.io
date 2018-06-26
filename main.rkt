@@ -27,7 +27,6 @@
   (define is-mirror? #f)
   (lambda _
     (parameterize ([current-website-language language])
-      (displayln (current-website-language))
       (define lang (current-website-language))
       (response/full 200
                      #"Okay"

@@ -63,7 +63,8 @@
    (list (make-header #"Location"
                       (string->bytes/utf-8 (string-append next-url
                                                           "?cookie="
-                                                          cookie))))
+                                                          cookie)))
+         (list (make-header #"Cache-Control" #"no-store")))
    (list #"")))
 
 (define PRICE-IN-EUR 3.98)
@@ -165,7 +166,7 @@ plan = excluded.plan, expires = excluded.expires"
                       #"Okay"
                       (current-seconds)
                       TEXT/HTML-MIME-TYPE
-                      `()
+                      (list (make-header #"Cache-Control" #"no-store"))
                       (list (string->bytes/utf-8
                              (include-template "fragments/billing/dashboard.html"))))))))
 
@@ -177,6 +178,7 @@ plan = excluded.plan, expires = excluded.expires"
     (define res (tx))
     (query-exec db-conn "COMMIT")
     res))
+
 
 (define (serve-pingback req secret)
   (unless (equal? secret pw-skey)
@@ -190,7 +192,7 @@ plan = excluded.plan, expires = excluded.expires"
                  #"OK"
                  (current-seconds)
                  TEXT/HTML-MIME-TYPE
-                 '()
+                 (list (make-header #"Cache-Control" #"no-store"))
                  '(#"OK")))
 
 (define (serve-buyplus req)
@@ -224,5 +226,6 @@ plan = excluded.plan, expires = excluded.expires"
                    (current-seconds)
                    TEXT/HTML-MIME-TYPE
                    (list (make-header #"Location"
-                                      (string->bytes/utf-8 payment-url)))
+                                      (string->bytes/utf-8 payment-url))
+                         (list (make-header #"Cache-Control" #"no-store")))
                    '())))
