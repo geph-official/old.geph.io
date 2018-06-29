@@ -141,7 +141,7 @@ plan = excluded.plan, expires = excluded.expires"
                    #"Okay"
                    (current-seconds)
                    TEXT/HTML-MIME-TYPE
-                   `()
+                   `(,(make-header #"Cache-Control" #"no-store"))
                    (list (string->bytes/utf-8
                           (include-template "fragments/billing/plans.html"))))))
 
