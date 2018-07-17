@@ -67,7 +67,7 @@
          (make-header #"Cache-Control" #"no-store"))
    (list #"")))
 
-(define PRICE-IN-USD 4.98)
+(define PRICE-IN-USD 3.98)
 
 (define (base-price)
   PRICE-IN-USD)

@@ -25,11 +25,11 @@
                 <div class="col-md">
                     <div id="onemonth" class="card text-center plan-card shadow-sm">
                         <strong>@(l10n 'billing.1monthplan)</strong><br>
-                        <span class="price-shout">@(currency-ticker)@(* 2 (base-price))</span><br>
+                        <span class="price-shout">@(currency-ticker)@(* 3 (base-price))</span><br>
                         <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
                         <span> <span class="badge badge-pill badge-secondary" style="width: auto">
                             @(l10n 'billing.save) 0%</span> </span><hr>
-                        <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 2 (base-price))) (l10n 'billing.month))</small>
+                        <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 3 (base-price))) (l10n 'billing.month))</small>
                     </div>
                 </div>
                 <div class="col-md">
@@ -38,7 +38,7 @@
                         <span class="price-shout">@(currency-ticker)@(* 1 (base-price))</span><br>
                         <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
                         <span> <span class="badge badge-pill badge-success" style="width: auto">
-                            @(l10n 'billing.save) 50%</span> </span><hr>
+                            @(l10n 'billing.save) 66%</span> </span><hr>
                         <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 12 (base-price))) (l10n 'billing.year))</small>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <span class="price-shout">@(currency-ticker)@(* 1.5 (base-price))</span><br>
                         <span class="plan-permonth">@(l10n 'billing.permonth)</span><br>
                         <span> <span class="badge badge-pill badge-warning" style="width: auto">
-                            @(l10n 'billing.save) 25%</span> </span><hr>
+                            @(l10n 'billing.save) 50%</span> </span><hr>
                         <small class="text-muted">@(format (l10n 'billing.billformat) (format "~a~a" @(currency-ticker) (* 1.5 6 (base-price))) (l10n 'billing.6months))</small>
                     </div>
                 </div>
