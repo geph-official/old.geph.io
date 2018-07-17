@@ -67,18 +67,15 @@
          (make-header #"Cache-Control" #"no-store"))
    (list #"")))
 
-(define PRICE-IN-EUR 3.98)
-(define PRICE-IN-CNY 29.98)
+(define PRICE-IN-USD 4.98)
 
 (define (base-price)
-  (cond
-    [(equal? "zhs" (current-website-language)) PRICE-IN-CNY]
-    [else PRICE-IN-EUR]))
+  PRICE-IN-USD)
 
 (define (currency-ticker)
   (cond
-    [(equal? "zhs" (current-website-language)) "¥"]
-    [else "€"]))
+    [(equal? "zhs" (current-website-language)) "$"]
+    [else "$"]))
 
 (define (seconds->sql-timestamp secs)
   (let ([current-date (seconds->date secs #f)])
@@ -207,9 +204,7 @@ plan = excluded.plan, expires = excluded.expires"
         [(< months 12) 1.5]
         [else 1]))
     (define-values (price code)
-      (if (equal? (current-website-language) "zhs")
-          (values (* months PRICE-IN-CNY price-multiplier) "CNY")
-          (values (* months PRICE-IN-EUR price-multiplier) "EUR")))
+      (values (* months PRICE-IN-USD price-multiplier) "USD"))
     (define invoice-id (make-invoice uid months (exact-round (* price 100)) code))
     (define payment-url
       (widget-url #:currency-code code
