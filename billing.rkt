@@ -200,7 +200,7 @@ plan = excluded.plan, expires = excluded.expires"
     (define months (string->number (extract-binding/single 'months bindings)))
     (define price-multiplier
       (cond
-        [(< months 6) 2]
+        [(< months 6) 3]
         [(< months 12) 1.5]
         [else 1]))
     (define-values (price code)
