@@ -10,7 +10,7 @@
   ;; replace download URLs
   (regexp-replace* #rx"dl.geph.io"
                    source-code
-                   "s3-ap-southeast-1.amazonaws.com/geph-mirror-sgp/dl"))
+                   "f001.backblazeb2.com/file/geph-dl"))
 
 (with-output-to-file #:exists 'replace "ZHS-STATIC.html"
   (lambda() (display (generate-mirror))))

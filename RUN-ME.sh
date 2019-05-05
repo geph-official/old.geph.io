@@ -1,6 +1,6 @@
 #!/bin/sh
 
 git pull
-racket generate-mirror.rkt && aws s3 mv ./ZHS-STATIC.html s3://geph-mirror-sgp/
+racket generate-mirror.rkt && rclone copy ZHS-STATIC.html b2:geph-dl/ && rm ZHS-STATIC.html
 racket main.rkt
 ./RUN-ME.sh
