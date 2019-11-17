@@ -71,20 +71,6 @@
                                 @when[(equal? "free" user-subscription)]{@list{
                                 <div class="row">
                                     <div class="col-sm">
-                                        <b>@(l10n 'billing.freeusage)</b><br>
-                                        <small class="text-secondary">@(l10n 'billing.freeusagedesc)</small>
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="progress" style="height:25px ;background-color:#888888">
-                                            <div class="progress-bar @(if (< freebalance 200) " bg-warning " " ")" role="progressbar" style="width: @(quotient (- 1000 freebalance) 10)%;" aria-valuenow="@(- 1000 freebalance)" aria-valuemin="0" aria-valuemax="1000">
-                                                @(- 1000 freebalance) / 1000 MB
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm">
                                         <b class="text-danger">@(l10n 'billing.upgradeaccount)</b> <br>
                                         <small class="text-secondary">@(l10n 'billing.plusblurb)</small>
                                     </div>

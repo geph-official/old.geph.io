@@ -17,7 +17,7 @@ billing.plus,Plus,Plus,Plus
 billing.gephplus,Geph Plus,迷雾通Plus,迷霧通Plus
 billing.free,Free,免费,免費
 billing.regitime,Registration time,注册日期,註冊日期
-billing.plusblurb,Upgrade to a premium Plus account to enjoy unlimited bandwidth and faster speeds for as low as <b class="text-success">$3.98/month!</b>,升级到Plus帐户，享受无限流量和飞快的网速！<b class="text-success">每月只需$3.98美元</b>,升級到Plus帳戶，享受無限流量和飛快的網速！<b class="text-success">每月只需$3.98美元</b>
+billing.plusblurb,Upgrade to a premium Plus account to enjoy unlimited speeds for as low as <b class="text-success">$3.98/month!</b>,升级到Plus帐户，享受飞快的网速！<b class="text-success">每月只需$3.98美元</b>,升級到Plus帳戶，享受無限流量和飛快的網速！<b class="text-success">每月只需$3.98美元</b>
 billing.transhistory,Transaction history,交易记录,交易記錄
 billing.transdate,Payment date,交易日期,交易日期
 billing.transexpiry,New expiry time,所购买帐户期限,所購買帳戶期限
@@ -29,14 +29,14 @@ billing.buybutton,See plans,马上订购,馬上訂購
 billing.extendbutton,Extend time,订购更多时间,訂購更多時間
 billing.buyheader,Buy a Plus subscription,订购迷雾通Plus帐户,訂購迷霧通Plus帳戶
 billing.extendheader,Extend your Plus subscription,延长迷雾通Plus帐户,延長迷霧通Plus帳戶
-billing.buysubheader,Plans will activate once payment is made and cancel automatically when they expire.,无限流量时长从支付的时刻算起，过期后自动降级到免费帐户。,無限流量時長從支付的時刻算起，過期後自動降級到免費帳戶。
+billing.buysubheader,Plans will activate once payment is made and cancel automatically when they expire.,时长从支付的时刻算起，过期后自动降级到免费帐户。,時長從支付的時刻算起，過期後自動降級到免費帳戶。
 billing.step1,Step 1,第一步,第一步
 billing.chooseplan,Choose a plan length,选择时长,選擇時長
 billing.step2,Step 2,第二步,第二步
 billing.pay,Pay for plan,付款,付款
-billing.1monthplan,1-month plan,一个月无限流量,一個月無限流量
-billing.6monthplan,6-month plan,半年无限流量,半年無限流量
-billing.1yearplan,1-year plan,一年无限流量,一年無限流量
+billing.1monthplan,1-month plan,一个月,一個月
+billing.6monthplan,6-month plan,半年,半年
+billing.1yearplan,1-year plan,一年,一年
 billing.6months,6 months,六个月,六個月
 billing.month,month,月,月
 billing.permonth,per month,(每月费用),(每月費用)
