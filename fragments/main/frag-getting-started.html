@@ -37,28 +37,36 @@ desktop-version "3.0.0") @(define android-version "3.0.0") @(local-require
     </h4>
     <div class="container-fluid no-margin">
       <div class="row">
-        @when[(equal? lang "en")]{ @list{
+        @when[(equal? lang "en")]{
+          @list{
         <div class="col col-6">
           <h6><b>Desktop (version @|desktop-version|)</b></h6>
         </div>
         <div class="col col-6">
           <h6><b>Android (version @|android-version|)</b></h6>
         </div>
-        } } @when[(equal? lang "zht")]{ @list{
+        }
+      } 
+      @when[(equal? lang "zht")]{
+        @list{
         <div class="col col-6">
           <h6><b>桌面（版本 @|desktop-version|）</b></h6>
         </div>
         <div class="col col-6">
           <h6><b>Android（版本 @|android-version|）</b></h6>
         </div>
-        } } @when[(equal? lang "zhs")]{ @list{
+        }
+      }
+      @when[(equal? lang "zhs")]{
+        @list{
         <div class="col col-6">
           <h6><b>桌面（版本 @|desktop-version|）</b></h6>
         </div>
         <div class="col col-6">
           <h6><b>Android（版本 @|android-version|）</b></h6>
         </div>
-        } }
+        }
+      }
       </div>
       <div class="row">
         <div class="col col-6">
